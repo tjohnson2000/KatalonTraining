@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>VariablesDemo</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>8b9e95a7-d3b8-46eb-9555-6ace856c54e1</testCaseGuid>
+   <variable>
+      <defaultValue>'Auto'</defaultValue>
+      <description></description>
+      <id>87b9b984-fd60-42d4-a15c-4f78e2cd881d</id>
+      <masked>false</masked>
+      <name>username</name>
+   </variable>
+   <variable>
+      <defaultValue>'mation'</defaultValue>
+      <description></description>
+      <id>05b26e2d-dc33-4625-b162-dcf1b6e52a47</id>
+      <masked>false</masked>
+      <name>password</name>
+   </variable>
+</TestCaseEntity>
