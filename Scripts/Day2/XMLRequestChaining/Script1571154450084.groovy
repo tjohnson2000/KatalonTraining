@@ -12,23 +12,26 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
 
-WebUI.openBrowser('')
+additionResult = WS.sendRequest(findTestObject('API/SOAP/Add'))
 
-WebUI.navigateToUrl('https://opensource-demo.orangehrmlive.com/')
+String responseBody = additionResult.getResponseBodyContent()
+println responseBody
 
-WebUI.click(findTestObject('Web/Page_OrangeHRM/span_Username'))
+def valueFetched = new XmlSlurper().parseText(responseBody)
+//def finalValue = valueFetched.AddResponse.AddResult	// This is how you would get a single value out of a nested object
+println valueFetched
 
-WebUI.setText(findTestObject('Web/Page_OrangeHRM/input_LOGIN Panel_txtUsername'), 'Admin')
+GlobalVariable.NUM1 = valueFetched
 
-WebUI.setEncryptedText(findTestObject('Web/Page_OrangeHRM/input_Username_txtPassword'), 'hUKwJTbofgPU9eVlw/CnDQ==')
+println ' Global Variable updated to ' + valueFetched
 
-WebUI.click(findTestObject('Web/Page_OrangeHRM/input_Password_Submit'))
+multiplicationResult = WS.sendRequestAndVerify(findTestObject('API/SOAP/Multiply', [('num1') : GlobalVariable.NUM1]))
 
-WebUI.click(findTestObject('Web/Page_OrangeHRM/b_Admin'))
+String multResBody = multiplicationResult.getResponseBodyContent()
+println multResBody
 
-WebUI.click(findTestObject('Web/Page_OrangeHRM/b_Dashboard'))
+def multValueFetched = new XmlSlurper().parseText(multResBody)
+println multValueFetched
 
-WebUI.closeBrowser()
 

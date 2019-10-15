@@ -12,23 +12,16 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
 
-WebUI.openBrowser('')
 
-WebUI.navigateToUrl('https://opensource-demo.orangehrmlive.com/')
+listusersResult = WS.sendRequest(findTestObject('API/REST/ListUsers'))
+def responseBody = listusersResult.getResponseBodyContent()
+def jsonSlurper = new groovy.json.JsonSlurper();
+def result = jsonSlurper.parseText(responseBody)
+def valueExtracted = result.data[4].first_name
 
-WebUI.click(findTestObject('Web/Page_OrangeHRM/span_Username'))
+GlobalVariable.USER1 = valueExtracted
+println 'GlobalVariable has been updated to ' + valueExtracted
 
-WebUI.setText(findTestObject('Web/Page_OrangeHRM/input_LOGIN Panel_txtUsername'), 'Admin')
-
-WebUI.setEncryptedText(findTestObject('Web/Page_OrangeHRM/input_Username_txtPassword'), 'hUKwJTbofgPU9eVlw/CnDQ==')
-
-WebUI.click(findTestObject('Web/Page_OrangeHRM/input_Password_Submit'))
-
-WebUI.click(findTestObject('Web/Page_OrangeHRM/b_Admin'))
-
-WebUI.click(findTestObject('Web/Page_OrangeHRM/b_Dashboard'))
-
-WebUI.closeBrowser()
+WS.sendRequestAndVerify(findTestObject('API/REST/UpdateUser'))
 

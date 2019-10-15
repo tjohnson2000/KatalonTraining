@@ -6,12 +6,22 @@
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'admin'</initValue>
+      <initValue>'Admin'</initValue>
       <name>USERNAME</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
       <initValue>'admin123'</initValue>
       <name>PASSWORD</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'10'</initValue>
+      <name>NUM1</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Sarah'</initValue>
+      <name>USER1</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

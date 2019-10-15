@@ -12,23 +12,10 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
 
-WebUI.openBrowser('')
+response = WS.sendRequest(findTestObject('API/REST/CustomerDetails'))
 
-WebUI.navigateToUrl('https://opensource-demo.orangehrmlive.com/')
+not_run: WS.verifyElementPropertyValue(response, 'CITY', 'Dallas')
 
-WebUI.click(findTestObject('Web/Page_OrangeHRM/span_Username'))
-
-WebUI.setText(findTestObject('Web/Page_OrangeHRM/input_LOGIN Panel_txtUsername'), 'Admin')
-
-WebUI.setEncryptedText(findTestObject('Web/Page_OrangeHRM/input_Username_txtPassword'), 'hUKwJTbofgPU9eVlw/CnDQ==')
-
-WebUI.click(findTestObject('Web/Page_OrangeHRM/input_Password_Submit'))
-
-WebUI.click(findTestObject('Web/Page_OrangeHRM/b_Admin'))
-
-WebUI.click(findTestObject('Web/Page_OrangeHRM/b_Dashboard'))
-
-WebUI.closeBrowser()
-
+WS.verifyResponseStatusCode(response, 200)
+WS.verifyResponseStatusCodeInRange(response, 200, 299)
